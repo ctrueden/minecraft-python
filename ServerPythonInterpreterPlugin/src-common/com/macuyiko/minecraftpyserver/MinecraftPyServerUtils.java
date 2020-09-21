@@ -20,6 +20,7 @@ public class MinecraftPyServerUtils {
 	public static void setup(ClassLoader classLoader) {
 		unpack(".", "lib-common/");
 		unpack(".", "python/");
+		unpack(".", "lib-http/");
 
 		addURLs(classLoader, new File("lib-common/"));
 		addURLs(classLoader, new File("lib-custom/"));

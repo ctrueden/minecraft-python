@@ -1,0 +1,5 @@
+#!/bin/sh
+cd "$(dirname "$0")/ServerPythonInterpreterPlugin"
+jar cf ../python.jar *.yml lib-common/ lib-http/ python/
+cd bin
+jar uf ../../python.jar *

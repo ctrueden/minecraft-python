@@ -10,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.macuyiko.minecraftpyserver.jython.JyChatServer;
 import com.macuyiko.minecraftpyserver.jython.JyCommandExecutor;
+import com.macuyiko.minecraftpyserver.jython.JyHTTPServer;
 import com.macuyiko.minecraftpyserver.jython.JyInterpreter;
 import com.macuyiko.minecraftpyserver.jython.JyWebSocketServer;
 import com.macuyiko.minecraftpyserver.jython.TelnetServer;
@@ -28,6 +29,7 @@ public class MinecraftPyServerPlugin extends JavaPlugin {
 		
 		int tcpsocketserverport = getConfig().getInt("pythonconsole.telnetport", 44444);
 		int websocketserverport = getConfig().getInt("pythonconsole.websocketport", 44445);
+		int httpport = getConfig().getInt("pythonconsole.httpeditorport", 8080);
 		boolean enablechatcommands = getConfig().getString("pythonconsole.enablechatcommands", "true").equalsIgnoreCase("true");
 		
 		if (tcpsocketserverport > 0)
@@ -35,6 +37,9 @@ public class MinecraftPyServerPlugin extends JavaPlugin {
 		
 		if (websocketserverport > 0)
 			startWebSocketServer(this, websocketserverport);
+		
+		if (httpport > 0)
+			JyHTTPServer.start(httpport, "lib-http");
 		
 		if (enablechatcommands) {
 			JyChatServer commandServer = startChatServer(this);
